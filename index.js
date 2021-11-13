@@ -18,15 +18,15 @@ const start = () => {
         clouds
       } = response.data;
   
-      bot.sendPhoto(chatId, `http://openweathermap.org/img/wn/${weather[0].icon}@4x.png`)
-      bot.sendMessage(
+    bot.sendPhoto(chatId, `http://openweathermap.org/img/wn/${weather[0].icon}@4x.png`)
+    bot.sendMessage(
         chatId,
         `На сегодня температура в городе ${name} составляет ${~main.temp}°C. Скорость ветра ${wind.speed} метров в секунду, облачность ${clouds.all} %`, {
           parse_mode: "HTML"
         }
       );
     }, error => {
-      bot.sendMessage(
+    bot.sendMessage(
         chatId,
         `Не нашли погоду для города <b>${city}</b>, возможно неправильно набрали название, попробуйте еще раз!`, {
           parse_mode: "HTML"
@@ -34,6 +34,7 @@ const start = () => {
       );
     });
   }
+
   bot.setMyCommands([
       {command: '/start', description: 'Приветствие!'},
       {command: '/weather', description: 'Узнай погоду в своем городе!!'}
@@ -53,7 +54,6 @@ const start = () => {
   bot.onText(/\/weather/, (msg, match) => {
     const chatId = msg.chat.id;
     const city = match.input.split(' ')[1];
-  
     if (city === undefined) {
       bot.sendMessage(
         chatId,
